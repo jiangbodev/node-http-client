@@ -24,7 +24,7 @@ const httpClient = {
       ok = true;
     }
     try {
-      callbacks.forEach(cb => {
+      this.callbacks.forEach(cb => {
         cb({ url, ok, content });
       });
     }
