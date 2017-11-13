@@ -27,7 +27,7 @@ const httpClient = {
     }
     catch (e) {
       if (this.errorLogEnabled) {
-        console.error('http get ${url} failed', e);
+        console.error(`http get ${url} failed`, e);
       }
     }
     let content = null;
