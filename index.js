@@ -4,6 +4,15 @@ require('superagent-charset')(request) // install charset
 const httpClient = {
 
   callbacks: [],
+  errorLogEnabled: true,
+
+  enableErrorLog: function() {
+    this.errorLogEnabled = true;
+  },
+
+  disableErrorLog: function() {
+    this.errorLogEnabled = false;
+  },
 
   registerCallback: function (fn) {
     if (fn) {
@@ -16,7 +25,11 @@ const httpClient = {
     try {
       res = await request.get(url).timeout(timeout).charset(charset).buffer();
     }
-    catch (e) { }
+    catch (e) {
+      if (this.errorLogEnabled) {
+        console.error('http get ${url} failed', e);
+      }
+    }
     let content = null;
     let ok = false;
     if (res && res.status == 200) {
