@@ -5,6 +5,14 @@ const httpClient = {
 
   callbacks: [],
   errorLogEnabled: true,
+  timeout: {
+    response: 10000, 
+    deadline: 20000 
+  },
+
+  setTimeout(tm) {
+    this.timeout = tm;
+  },
 
   enableErrorLog: function() {
     this.errorLogEnabled = true;
@@ -20,10 +28,15 @@ const httpClient = {
     }
   },
 
-  get: async function (url, charset = '', timeout = { response: 5000, deadline: 10000 }) {
+  get: async function (url, charset = '', timeout) {
+
+    let theTimeout = timeout;
+    if (!theTimeout) {
+      theTimeout = this.timeout;
+    }
     let res;
     try {
-      res = await request.get(url).timeout(timeout).charset(charset).buffer();
+      res = await request.get(url).timeout(theTimeout).charset(charset).buffer();
     }
     catch (e) {
       if (this.errorLogEnabled) {
