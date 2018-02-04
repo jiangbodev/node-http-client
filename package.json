@@ -1,10 +1,10 @@
 {
   "name": "node-http-client",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "node http client",
   "main": "index.js",
   "dependencies": {
-    "superagent": "^3.8.0",
+    "superagent": "^3.8.2",
     "superagent-charset": "^1.2.0",
     "superagent-proxy": "^1.0.2"
   }
